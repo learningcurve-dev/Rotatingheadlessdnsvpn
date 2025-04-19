@@ -1,13 +1,10 @@
-#!/bin/bash
-# File: init.sh
-# Usage: bash init.sh
-# Description: Bootstraps the full rotatingheadlessdnsvpn system locally
-
+#!/data/data/com.termux/files/usr/bin/bash
 set -e
+
 echo "[+] Bootstrapping rotatingheadlessdnsvpn..."
 
-mkdir -p rotatingheadlessdnsvpn/{logs,configs,scripts}
-cd rotatingheadlessdnsvpn
+mkdir -p ~/rotatingheadlessdnsvpn/{logs,configs,scripts}
+cd ~/rotatingheadlessdnsvpn
 
 echo "[+] Creating config files..."
 
@@ -86,21 +83,4 @@ PROXIES=("http://proxy1.example.com:8080" "http://proxy2.example.com:8080")
 while true; do
   for proxy in "${PROXIES[@]}"; do
     export http_proxy=$proxy
-    export https_proxy=$proxy
-    echo "[+] Proxy set to $proxy"
-    sleep 120
-  done
-done
-EOF
-
-cat <<'EOF' > scripts/tunnel_start.sh
-#!/data/data/com.termux/files/usr/bin/bash
-cd ~/go/go-tun2socks
-./tun2socks
-EOF
-
-chmod +x setup.sh run.sh watchdog.sh scripts/*.sh
-
-echo "[✓] Project structure created."
-echo "[*] To finish setup, run:"
-echo "     cd rotatingheadlessdnsvpn && bash setup.sh"
+    export https_proxy=$
